@@ -1,25 +1,23 @@
 from kivy.app import App
-from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-import requests
+from kivy.uix.button import Button
+import webbrowser
 
 class KivyApp(App):
     def build(self):
-        layout = BoxLayout(orientation='vertical')
-        button = Button(text='Make Request to Flask')
-        button.bind(on_press=self.make_request_to_flask)
-        layout.add_widget(button)
-        return layout
-
-    def make_request_to_flask(self, instance):
-        url = 'http://127.0.0.1:5000'  # Cambia esta URL según tu configuración de Flask
-        data = {'barcode': '123', 'category': 'example', 'quantity': '5', 'price': '10.99'}
-        response = requests.post(url, data=data)
-
-        if response.status_code == 200:
-            print('Solicitud exitosa:', response.text)
-        else:
-            print('Error en la solicitud:', response.status_code)
+        webbrowser.open('http://127.0.0.1:5000/')
+    #    layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
+#
+    #    # Botón para abrir el navegador web con la URL del servidor Flask
+    #    open_browser_button = Button(text='Abrir Navegador Web', size_hint=(1, 1))
+    #    open_browser_button.bind(on_press=self.open_browser)
+    #    layout.add_widget(open_browser_button)
+#
+    #    return layout
+#
+    #def open_browser(self, instance):
+    #    # Abre el navegador web externo con la URL del servidor Flask
+    #    webbrowser.open('http://127.0.0.1:5000/')
 
 if __name__ == '__main__':
     KivyApp().run()

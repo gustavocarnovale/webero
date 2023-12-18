@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_cors import CORS  # Importa la extensión CORS
+import firebase_admin
 from firebase_admin import credentials, db
 from barcode import generate
 from barcode.writer import ImageWriter
@@ -14,8 +15,12 @@ CORS(app)  # Configura CORS
 
 @app.route('/')
 def index():
-    return "Hello, this is the Flask backend!"
+    return render_template('index.html')
 
+@app.route('/product_form')
+def product_form():
+    return render_template('product_form.html')
+    
 @app.route('/save_product', methods=['POST'])
 def save_product():
     barcode = request.form.get('barcode')
@@ -66,4 +71,4 @@ def generate_barcode(barcode):
     return "Barcode generated successfully!"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=True)
