@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Stock</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>View Stock</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('product_form') }}">Add a Product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content">
+        <h2>Products in Stock</h2>
+
+        {% if products %}
+            {% for category, category_products in products.items() %}
+                <h3>{{ category }}</h3>
+                <table>
+                    <tr>
+                        <th>Barcode</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for product_id, product_data in category_products.items() %}
+                        <tr>
+                            <td>{{ product_data['barcode'] }}</td>
+                            <td>{{ product_data['quantity'] }}</td>
+                            <td>{{ product_data['price'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% else %}
+            <p>No products available.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Flask Firebase App</p>
+    </footer>
+</body>
+</html>

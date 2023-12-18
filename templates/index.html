@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Firebase App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Flask Firebase App</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('product_form') }}">Add a Product</a></li>
+                <li><a href="{{ url_for('view_stock') }}">View Stock</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="content">
+        <p>Welcome to the Flask Firebase App!</p>
+    </section>
+    <footer>
+        <p>&copy; 2023 Flask Firebase App</p>
+    </footer>
+</body>
+</html>
