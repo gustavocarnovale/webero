@@ -117,3 +117,29 @@ nav a {
 nav a:hover {
     background-color: #555;
 }
+
+form.sales-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Estilos específicos para la tabla de historial de ventas */
+table.sales-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th.sales-header, td.sales-data {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th.sales-header {
+    background-color: #333;
+    color: white;
+}

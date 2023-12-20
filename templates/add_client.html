@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Firebase App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Add Client</title>
 </head>
 <body>
     <header>
@@ -20,11 +20,17 @@
             </ul>
         </nav>
     </header>
-    <section class="content">
-        <p>Welcome to the Flask Firebase App!</p>
-    </section>
-    <footer>
-        <p>&copy; 2023 Flask Firebase App</p>
-    </footer>
+
+    <h1>Add a Client</h1>
+
+    <form method="POST" action="{{ url_for('add_client') }}" class="client-form">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" id="phone" required>
+
+        <button type="submit">Add Client</button>
+    </form>
 </body>
 </html>

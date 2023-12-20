@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Sales</title>
+</head>
+<body>
+    <header>
+        <h1>Flask Firebase App</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('product_form') }}">Add a Product</a></li>
+                <li><a href="{{ url_for('view_stock') }}">View Stock</a></li>
+                <li><a href="{{ url_for('sales') }}">Sell a Product</a></li>
+                <li><a href="{{ url_for('view_sales') }}">Sales</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Sales</h1>
+    
+
+<!-- Formulario para seleccionar un cliente al realizar una venta -->
+<form method="POST" action="{{ url_for('process_sale') }}">
+    <label for="client_id">Select Client:</label>
+    <select name="client_id">
+        {% for client_key, client_data in clients.items() %}
+            <option value="{{ client_key }}">{{ client_data['name'] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="product_key">Select Product:</label>
+    <select name="product_key">
+        {% for product_key, product_data in products.items() %}
+            <option value="{{ product_key }}">{{ product_data['name'] }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" required>
+
+    <button type="submit">Sell</button>
+</form>
+
+
+    <script>
+        // Agrega un evento al campo de código de barras para buscar y mostrar la información del producto
+        document.getElementById('barcode').addEventListener('blur', function () {
+            // Obtén el valor del código de barras
+            var barcodeValue = this.value;
+
+            // Realiza una solicitud al servidor para obtener la información del producto
+            // Puedes usar AJAX, Fetch API, o cualquier otro método aquí
+            // Por simplicidad, asumiremos que hay una ruta en Flask que devuelve la información del producto
+            fetch(`/get_product_info/${barcodeValue}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Muestra la información del producto en el contenedor correspondiente
+                    document.getElementById('product-info').innerHTML = `
+                        <p>Name: ${data.name}</p>
+                        <p>Available Quantity: ${data.quantity}</p>
+                        <p>Unit Price: ${data.price}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching product information:', error);
+                });
+        });
+    </script>
+</body>
+</html>

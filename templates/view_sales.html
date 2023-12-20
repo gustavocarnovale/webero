@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask Firebase App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Sales History</title>
 </head>
 <body>
     <header>
@@ -15,16 +15,29 @@
                 <li><a href="{{ url_for('product_form') }}">Add a Product</a></li>
                 <li><a href="{{ url_for('view_stock') }}">View Stock</a></li>
                 <li><a href="{{ url_for('sales') }}">Sell a Product</a></li>
-                <li><a href="{{ url_for('view_sales') }}">Sales</a></li>
-                <li><a href="{{ url_for('add_client') }}">Add a Client</a></li>
+                <li><a href="{{ url_for('view_sales') }}">sales</a></li>
             </ul>
         </nav>
     </header>
-    <section class="content">
-        <p>Welcome to the Flask Firebase App!</p>
-    </section>
-    <footer>
-        <p>&copy; 2023 Flask Firebase App</p>
-    </footer>
+    <h1>Sales History</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale_key, sale_data in sales.items() %}
+                <tr>
+                    <td>{{ sale_data['product_key'] }}</td>
+                    <td>{{ sale_data['quantity'] }}</td>
+                    <td>{{ sale_data['timestamp'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
